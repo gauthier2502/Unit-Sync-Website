@@ -17,13 +17,13 @@ const FeatureCard = ({
   className?: string;
   width?: "half" | "full"
 }) => (
-  <div className={`group flex flex-col bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:border-blue-100 hover:bg-white ${width === 'full' ? 'md:col-span-2' : 'md:col-span-1'} ${className}`}>
+  <div className={`group flex flex-col bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 ${width === 'full' ? 'md:col-span-2' : 'md:col-span-1'} ${className}`}>
     <div className="p-8 pb-0 flex flex-col h-full">
-      <h3 className="text-2xl font-serif font-bold text-slate-900 mb-3 transition-colors group-hover:text-[#2E5BFF]">{title}</h3>
+      <h3 className="text-2xl font-serif font-bold text-slate-900 mb-3">{title}</h3>
       <p className="text-slate-600 leading-relaxed mb-6 max-w-md">{description}</p>
       <div className="flex items-center text-[#2E5BFF] font-semibold text-sm cursor-pointer mb-8 group/link">
-        <span className="group-hover/link:underline">{cta}</span> 
-        <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover/link:translate-x-1" />
+        <span>{cta}</span>
+        <ArrowRight className="w-4 h-4 ml-1" />
       </div>
       <div className="flex-1 w-full flex items-end justify-center overflow-hidden">
         {children}
@@ -54,12 +54,12 @@ export const FeaturesGrid = () => {
           description="Discover the reasons behind every major surge in patient volume with detailed, AI-generated summaries embedded right on the performance chart."
           cta="Learn more"
         >
-          <div className="w-full h-64 bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] p-4 border border-b-0 border-slate-200 relative group-hover:shadow-[0_-15px_50px_-15px_rgba(46,91,255,0.15)] transition-all duration-500">
+          <div className="w-full h-64 bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] p-4 border border-b-0 border-slate-200 relative">
              {/* Header with Status */}
              <div className="absolute top-4 left-6 z-10 flex flex-col items-start">
-                <div className="flex items-center space-x-2 mb-1 group-hover:scale-105 transition-transform origin-left">
+                <div className="flex items-center space-x-2 mb-1">
                     <span className="flex h-2 w-2 relative">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75 group-hover:animate-ping fast"></span>
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                     </span>
                     <span className="text-xs font-bold text-red-500 uppercase tracking-wider">Surge Detected</span>
@@ -67,7 +67,7 @@ export const FeaturesGrid = () => {
                 <div className="text-2xl font-bold text-slate-900">142 <span className="text-sm font-normal text-slate-500">Patients/hr</span></div>
              </div>
 
-             <div className="w-full h-full transition-transform duration-700 group-hover:scale-[1.02] origin-bottom">
+             <div className="w-full h-full">
                 <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={[
                     {time: '08:00', v: 40}, 
@@ -94,7 +94,7 @@ export const FeaturesGrid = () => {
              </div>
              
              {/* Peak Time Annotation */}
-             <div className="absolute top-[35%] right-[25%] bg-slate-900 text-white text-[10px] px-3 py-1.5 rounded-lg shadow-lg flex items-center space-x-2 border border-slate-700 animate-bounce group-hover:animate-none group-hover:scale-110 transition-transform duration-300" style={{ animationDuration: '3s' }}>
+             <div className="absolute top-[35%] right-[25%] bg-slate-900 text-white text-[10px] px-3 py-1.5 rounded-lg shadow-lg flex items-center space-x-2 border border-slate-700 animate-bounce" style={{ animationDuration: '3s' }}>
                 <div className="flex flex-col items-start">
                     <span className="font-bold text-red-400">Peak Predicted</span>
                     <span className="text-[9px] text-slate-300">14:00 • +45% Volume</span>
@@ -115,12 +115,12 @@ export const FeaturesGrid = () => {
           description="View a monthly breakdown of bed occupancy and equipment usage from every department. Plus, see a forecast of your capacity needs."
           cta="Learn more"
         >
-          <div className="w-full h-64 bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] p-6 border border-b-0 border-slate-200 flex flex-col justify-end group-hover:shadow-[0_-15px_50px_-15px_rgba(46,91,255,0.1)] transition-all duration-500">
+          <div className="w-full h-64 bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] p-6 border border-b-0 border-slate-200 flex flex-col justify-end">
              <div className="flex justify-between items-end mb-2 px-2">
                 <div className="text-xs font-semibold text-slate-500">ICU Beds</div>
                 <div className="text-xs font-semibold text-slate-500">OR Rooms</div>
              </div>
-             <div className="transition-transform duration-700 group-hover:scale-y-[1.05] origin-bottom">
+             <div>
                 <ResponsiveContainer width="100%" height={160}>
                 <BarChart data={[
                     {a: 65, b: 40}, {a: 59, b: 45}, {a: 80, b: 50}, {a: 81, b: 55}, {a: 56, b: 40}
@@ -140,7 +140,7 @@ export const FeaturesGrid = () => {
           cta="Learn more"
           width="full"
         >
-          <div className="w-full h-auto min-h-[220px] bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] border border-b-0 border-slate-200 overflow-hidden flex flex-col group-hover:shadow-[0_-15px_50px_-15px_rgba(46,91,255,0.1)] transition-all duration-500">
+          <div className="w-full h-auto min-h-[220px] bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] border border-b-0 border-slate-200 overflow-hidden flex flex-col">
             {/* Table Header */}
             <div className="flex items-center px-6 py-3 border-b border-slate-100 bg-slate-50/50">
                 <div className="w-1/4 text-xs font-bold text-slate-400 uppercase">Patient ID</div>
@@ -155,15 +155,15 @@ export const FeaturesGrid = () => {
                     { id: 'P-9284', sev: 'Level 3 (Urgent)', status: 'In Assessment', color: 'text-orange-500' },
                     { id: 'P-9289', sev: 'Level 4 (Standard)', status: 'Discharged', color: 'text-green-600' },
                 ].map((row, i) => (
-                    <div key={i} className="flex items-center px-6 py-4 border-b border-slate-50 hover:bg-blue-50/30 transition-colors cursor-pointer group/row">
-                        <div className="w-1/4 text-sm font-bold text-slate-800 transition-colors group-hover/row:text-[#2E5BFF]">{row.id}</div>
+                    <div key={i} className="flex items-center px-6 py-4 border-b border-slate-50 cursor-pointer group/row">
+                        <div className="w-1/4 text-sm font-bold text-slate-800">{row.id}</div>
                         <div className={`w-1/4 text-sm font-medium ${row.color}`}>{row.sev}</div>
                         <div className="w-1/4 text-sm text-slate-500 flex items-center">
                             <div className={`w-1.5 h-1.5 rounded-full mr-2 ${row.status === 'Discharged' ? 'bg-slate-300' : 'bg-blue-500 animate-pulse'}`}></div>
                             {row.status}
                         </div>
-                        <div className="w-1/4 text-right transform translate-x-4 opacity-0 group-hover/row:opacity-100 group-hover/row:translate-x-0 transition-all duration-300">
-                             <button className="text-xs font-semibold text-[#2E5BFF] bg-blue-50 px-3 py-1 rounded-full hover:bg-blue-100">
+                        <div className="w-1/4 text-right">
+                             <button className="text-xs font-semibold text-[#2E5BFF] bg-blue-50 px-3 py-1 rounded-full">
                                 Details
                              </button>
                         </div>
@@ -179,10 +179,10 @@ export const FeaturesGrid = () => {
           description="Access AI-generated shift recaps, critical patient KPIs, and the actual audio of the doctor's handover briefing—all without leaving UnitSync."
           cta="Learn more"
         >
-          <div className="w-full h-64 bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] p-6 border border-b-0 border-slate-200 relative flex flex-col group-hover:shadow-[0_-15px_50px_-15px_rgba(46,91,255,0.1)] transition-all duration-500">
+          <div className="w-full h-64 bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] p-6 border border-b-0 border-slate-200 relative flex flex-col">
              <div className="flex justify-between items-center mb-6">
                  <div className="flex items-center space-x-3">
-                     <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white transition-all duration-300 group-hover:bg-[#2E5BFF] group-hover:scale-110">
+                     <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white">
                          <Play className="w-4 h-4 fill-current ml-0.5" />
                      </div>
                      <div>
@@ -192,22 +192,22 @@ export const FeaturesGrid = () => {
                  </div>
                  <div className="text-xs font-mono text-slate-400">14:20</div>
              </div>
-             
+
              {/* Waveform Visualization */}
              <div className="flex items-center justify-between space-x-1 h-12 mb-4 px-2">
                  {[40, 60, 30, 80, 50, 90, 40, 60, 70, 40, 30, 60, 40, 80, 50, 70, 40, 20].map((h, i) => (
-                     <div 
-                        key={i} 
-                        className={`w-1.5 rounded-full transition-all duration-500 ${i < 7 ? 'bg-[#2E5BFF]' : 'bg-slate-200 group-hover:bg-slate-300'}`} 
-                        style={{ 
+                     <div
+                        key={i}
+                        className={`w-1.5 rounded-full ${i < 7 ? 'bg-[#2E5BFF]' : 'bg-slate-200'}`}
+                        style={{
                             height: `${h}%`,
-                            transform: `scaleY(${i < 7 ? 1 : 0.8})` // Initial state for inactive bars
+                            transform: `scaleY(${i < 7 ? 1 : 0.8})`
                         }}
                      ></div>
                  ))}
              </div>
 
-             <div className="bg-slate-50 p-3 rounded-lg border border-slate-100 transition-colors group-hover:bg-blue-50/50">
+             <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
                  <div className="flex items-start space-x-2">
                      <div className="mt-1 w-2 h-2 rounded-full bg-[#2E5BFF] flex-shrink-0 animate-pulse"></div>
                      <p className="text-xs text-slate-600 leading-snug">
@@ -224,14 +224,14 @@ export const FeaturesGrid = () => {
           description="Schedule recurring shift patterns for specialized teams. Create automated plans for residents, attendings, and nurses to ensure 24/7 coverage."
           cta="Learn more"
         >
-           <div className="w-full h-64 bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] p-6 border border-b-0 border-slate-200 relative flex flex-col items-center justify-center group-hover:shadow-[0_-15px_50px_-15px_rgba(46,91,255,0.1)] transition-all duration-500">
+           <div className="w-full h-64 bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] p-6 border border-b-0 border-slate-200 relative flex flex-col items-center justify-center">
              <div className="absolute top-4 right-4">
                  <MoreHorizontal className="w-5 h-5 text-slate-400" />
              </div>
-             
+
              <div className="flex items-center space-x-8">
                  {/* Donut Chart Representation */}
-                 <div className="relative w-32 h-32 transition-transform duration-700 ease-out group-hover:rotate-12 group-hover:scale-105">
+                 <div className="relative w-32 h-32">
                      <svg viewBox="0 0 36 36" className="w-full h-full transform -rotate-90">
                          {/* Circle Background */}
                          <path className="text-slate-100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
@@ -241,22 +241,22 @@ export const FeaturesGrid = () => {
                          <path className="text-purple-500" strokeDasharray="25, 100" strokeDashoffset="-40" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
                      </svg>
                      <div className="absolute inset-0 flex flex-col items-center justify-center">
-                         <span className="text-2xl font-bold text-slate-900 transition-all duration-500 group-hover:text-[#2E5BFF] group-hover:scale-110">100%</span>
+                         <span className="text-2xl font-bold text-slate-900">100%</span>
                          <span className="text-[10px] uppercase font-bold text-slate-400">Coverage</span>
                      </div>
                  </div>
 
                  {/* Legend */}
                  <div className="space-y-3">
-                     <div className="flex items-center text-xs group-hover:translate-x-1 transition-transform duration-300 delay-75">
+                     <div className="flex items-center text-xs">
                          <div className="w-3 h-3 rounded bg-[#2E5BFF] mr-2"></div>
                          <span className="text-slate-600">Nurses (40%)</span>
                      </div>
-                     <div className="flex items-center text-xs group-hover:translate-x-1 transition-transform duration-300 delay-100">
+                     <div className="flex items-center text-xs">
                          <div className="w-3 h-3 rounded bg-purple-500 mr-2"></div>
                          <span className="text-slate-600">Residents (25%)</span>
                      </div>
-                     <div className="flex items-center text-xs group-hover:translate-x-1 transition-transform duration-300 delay-150">
+                     <div className="flex items-center text-xs">
                          <div className="w-3 h-3 rounded bg-slate-200 mr-2"></div>
                          <span className="text-slate-600">On Call (35%)</span>
                      </div>
