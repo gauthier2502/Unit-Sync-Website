@@ -18,10 +18,6 @@ export default defineConfig(({ mode }) => {
         alias: {
           '@': path.resolve(__dirname, '.'),
         }
-      },
-      optimizeDeps: {
-        include: ['@google/genai'],
-        exclude: ['ws', 'google-auth-library']
       }
     };
 });
