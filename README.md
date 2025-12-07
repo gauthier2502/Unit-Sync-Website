@@ -40,7 +40,7 @@ UnitSync is a marketing website and demo booking platform for a hospital operati
 - **Variant A** - Traditional hero section with direct call-to-action
 - **Variant B** - Enhanced version with expanded security documentation dropdown
 - Context-based routing for testing different user experiences
-- **Toggle component** for easy switching between variants (development mode)
+- Toggle component for easy switching between variants (development mode)
 
 ## Technology Stack
 
