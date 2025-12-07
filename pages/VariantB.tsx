@@ -6,7 +6,7 @@ import { HowUnitSyncWorksVariantB } from '../components/variants/HowUnitSyncWork
 import { InsideDashboardVariantB } from '../components/variants/InsideDashboardVariantB';
 import { DoctorTestimonialVariantB } from '../components/variants/DoctorTestimonialVariantB';
 import { SuccessStoriesVariantB } from '../components/variants/SuccessStoriesVariantB';
-import { FAQSectionVariantB } from '../components/variants/FAQSectionVariantB';
+import { FAQSection } from '../components/FAQSection';
 import { Assistant } from '../components/Assistant';
 import { Navbar } from '../components/Navbar';
 import { Timeline } from '../components/Timeline';
@@ -105,7 +105,7 @@ export const VariantB: React.FC = () => {
 
         {/* FAQ SECTION */}
         <div id="faq" className="scroll-mt-28">
-            <FAQSectionVariantB />
+            <FAQSection />
         </div>
 
         {/* CTA FINAL */}
