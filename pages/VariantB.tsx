@@ -45,7 +45,7 @@ export const VariantB: React.FC = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
                   <Link to="/book-demo-b">
-                    <Button size="lg" withIcon className="w-full sm:w-auto">Request a Demo</Button>
+                    <Button size="lg" withIcon className="w-full sm:w-auto">Start Reclaiming Time</Button>
                   </Link>
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">View ROI Calculator</Button>
                 </div>
