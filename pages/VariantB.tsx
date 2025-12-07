@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { DashboardMockup } from '../components/DashboardMockup';
 import { FeaturesGrid } from '../components/FeaturesGrid';
-import { InsideDashboard } from '../components/InsideDashboard';
+import { InsideDashboardVariantB } from '../components/variants/InsideDashboardVariantB';
 import { DoctorTestimonial } from '../components/DoctorTestimonial';
 import { FAQSection } from '../components/FAQSection';
 import { Assistant } from '../components/Assistant';
@@ -89,7 +89,7 @@ export const VariantB: React.FC = () => {
         </div>
 
         {/* INSIDE DASHBOARD SECTION */}
-        <InsideDashboard />
+        <InsideDashboardVariantB />
 
         {/* DOCTOR TESTIMONIAL */}
         <div id="testimonials" className="scroll-mt-28">
