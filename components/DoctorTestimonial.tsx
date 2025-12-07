@@ -103,7 +103,7 @@ export const DoctorTestimonial: React.FC = () => {
 
             <div className="pt-6 flex flex-col sm:flex-row items-start sm:items-center gap-6">
               <Button size="lg" className="rounded-full px-10 py-4 shadow-xl shadow-blue-500/20">
-                Get started
+                Learn More
               </Button>
 
               <div className="flex gap-3">
