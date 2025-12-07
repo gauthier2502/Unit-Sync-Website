@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Rocket, ArrowRight } from 'lucide-react';
+import { Button } from './Button';
 
 interface TimelinePhase {
   period: string;
@@ -37,7 +40,7 @@ export const Timeline: React.FC = () => {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto mb-16">
           <div className="relative">
             <div className="absolute top-6 left-0 right-0 h-0.5 bg-slate-300 hidden md:block" style={{ left: '5%', right: '5%' }}></div>
 
@@ -73,6 +76,31 @@ export const Timeline: React.FC = () => {
               ))}
             </div>
           </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center space-x-2 bg-blue-50 text-[#2E5BFF] px-4 py-2 rounded-full text-sm font-semibold mb-6 border border-blue-100">
+            <Rocket className="w-4 h-4" />
+            <span>Limited pilot spots available for Q4</span>
+          </div>
+
+          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+            Ready to Transform Your Hospital?
+          </h3>
+
+          <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
+            Join forward-thinking hospitals already experiencing measurable improvements in efficiency and patient care.
+          </p>
+
+          <Link to="/book-demo">
+            <Button size="lg" className="!bg-[#2E5BFF] !text-white hover:!bg-blue-600 shadow-xl shadow-blue-500/30 px-10 py-4 h-auto text-lg">
+              Start Pilot Program <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </Link>
+
+          <p className="text-sm text-slate-500 mt-6">
+            No long-term commitment required • Free pilot phase • Cancel anytime
+          </p>
         </div>
       </div>
     </section>

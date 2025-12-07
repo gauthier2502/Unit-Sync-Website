@@ -10,7 +10,7 @@ import { Assistant } from '../components/Assistant';
 import { Navbar } from '../components/Navbar';
 import { Timeline } from '../components/Timeline';
 import { ABTestToggle } from '../components/ABTestToggle';
-import { ShieldCheck, Activity, Twitter, Linkedin, Mail, MapPin, Wifi, ArrowRight, Rocket } from 'lucide-react';
+import { ShieldCheck, Activity, Twitter, Linkedin, Mail, MapPin, Wifi, ArrowRight } from 'lucide-react';
 
 export const VariantB: React.FC = () => {
   return (
@@ -98,34 +98,6 @@ export const VariantB: React.FC = () => {
 
         {/* TIMELINE SECTION - NEW FOR VARIANT B */}
         <Timeline />
-
-        {/* START PILOT CTA - NEW FOR VARIANT B */}
-        <section className="py-20 bg-white">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <div className="inline-flex items-center space-x-2 bg-blue-50 text-[#2E5BFF] px-4 py-2 rounded-full text-sm font-semibold mb-6 border border-blue-100">
-              <Rocket className="w-4 h-4" />
-              <span>Limited pilot spots available for Q4</span>
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
-              Ready to Transform Your Hospital?
-            </h2>
-
-            <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
-              Join forward-thinking hospitals already experiencing measurable improvements in efficiency and patient care.
-            </p>
-
-            <Link to="/book-demo">
-              <Button size="lg" className="!bg-[#2E5BFF] !text-white hover:!bg-blue-600 shadow-xl shadow-blue-500/30 px-10 py-4 h-auto text-lg">
-                Start Pilot Program <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-
-            <p className="text-sm text-slate-500 mt-6">
-              No long-term commitment required • Free pilot phase • Cancel anytime
-            </p>
-          </div>
-        </section>
 
         {/* FAQ SECTION */}
         <div id="faq" className="scroll-mt-28">
