@@ -15,7 +15,7 @@ import { ShieldCheck, Activity, Twitter, Linkedin, Mail, MapPin, Wifi, ArrowRigh
 export const VariantB: React.FC = () => {
   return (
     <div className="min-h-screen bg-white selection:bg-[#2E5BFF] selection:text-white">
-      <Navbar />
+      <Navbar ctaButtonText="Start Pilot" />
 
       <main className="pt-20">
 

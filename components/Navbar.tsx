@@ -4,7 +4,11 @@ import { Button } from './Button';
 import { NAV_ITEMS } from '../constants';
 import { Menu, Activity } from 'lucide-react';
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  ctaButtonText?: string;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ ctaButtonText = 'Get a Demo' }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   return (
@@ -28,7 +32,7 @@ export const Navbar: React.FC = () => {
 
           <div className="flex items-center space-x-4">
             <Link to="/book-demo">
-              <Button size="sm" className="hidden md:inline-flex">Get a Demo</Button>
+              <Button size="sm" className="hidden md:inline-flex">{ctaButtonText}</Button>
             </Link>
             <button
               className="md:hidden text-slate-600"
@@ -54,7 +58,7 @@ export const Navbar: React.FC = () => {
               </a>
             ))}
             <Link to="/book-demo">
-              <Button className="w-full">Get a Demo</Button>
+              <Button className="w-full">{ctaButtonText}</Button>
             </Link>
           </nav>
         </div>
