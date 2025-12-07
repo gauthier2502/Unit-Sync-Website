@@ -84,10 +84,6 @@ export const Timeline: React.FC = () => {
             <span>Limited pilot spots available for Q4</span>
           </div>
 
-          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
-            Ready to Transform Your Hospital?
-          </h3>
-
           <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
             Join forward-thinking hospitals already experiencing measurable improvements in efficiency and patient care.
           </p>
