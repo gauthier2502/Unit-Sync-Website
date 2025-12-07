@@ -5,6 +5,7 @@ import { DashboardMockup } from '../components/DashboardMockup';
 import { FeaturesGrid } from '../components/FeaturesGrid';
 import { InsideDashboardVariantB } from '../components/variants/InsideDashboardVariantB';
 import { DoctorTestimonialVariantB } from '../components/variants/DoctorTestimonialVariantB';
+import { SuccessStoriesVariantB } from '../components/variants/SuccessStoriesVariantB';
 import { FAQSection } from '../components/FAQSection';
 import { Assistant } from '../components/Assistant';
 import { Navbar } from '../components/Navbar';
@@ -95,6 +96,9 @@ export const VariantB: React.FC = () => {
         <div id="testimonials" className="scroll-mt-28">
             <DoctorTestimonialVariantB />
         </div>
+
+        {/* SUCCESS STORIES SECTION */}
+        <SuccessStoriesVariantB />
 
         {/* TIMELINE SECTION - NEW FOR VARIANT B */}
         <Timeline />
