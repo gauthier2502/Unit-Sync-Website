@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, FileDown } from 'lucide-react';
+import { ChevronDown, ChevronUp, FileDown, Shield } from 'lucide-react';
 import { FAQS } from '../../constants';
 import { Button } from '../Button';
 
 export const FAQSectionVariantB: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [isOverviewOpen, setIsOverviewOpen] = useState(false);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -60,20 +61,69 @@ export const FAQSectionVariantB: React.FC = () => {
         </div>
 
         <div className="mt-16 flex flex-col items-center">
-          <div className="text-center mb-6">
-            <h3 className="text-2xl font-bold text-slate-900 mb-2">Need more technical details?</h3>
-            <p className="text-slate-600">Download our comprehensive technical documentation</p>
-          </div>
-          <a
-            href="/UnitSync-Technical-Information.pdf"
-            download
-            className="inline-block"
+          <button
+            onClick={() => setIsOverviewOpen(!isOverviewOpen)}
+            className="flex items-center gap-2 text-slate-700 hover:text-slate-900 transition-colors group"
           >
-            <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800">
-              <FileDown className="w-5 h-5 mr-2" />
-              Download Technical PDF
-            </Button>
-          </a>
+            <Shield className="w-5 h-5" />
+            <span className="text-lg font-semibold">See Security & Integration Overview</span>
+            <span className="text-sm text-slate-500">(3-min read)</span>
+            {isOverviewOpen ? (
+              <ChevronUp className="w-5 h-5 text-slate-400 group-hover:text-slate-600" />
+            ) : (
+              <ChevronDown className="w-5 h-5 text-slate-400 group-hover:text-slate-600" />
+            )}
+          </button>
+
+          <div
+            className={`transition-all duration-300 ease-in-out overflow-hidden ${
+              isOverviewOpen ? 'max-h-[800px] opacity-100 mt-8' : 'max-h-0 opacity-0'
+            }`}
+          >
+            <div className="max-w-3xl mx-auto bg-slate-50 rounded-lg p-8 border border-slate-200">
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-lg font-bold text-slate-900 mb-2">Security Compliance</h4>
+                  <p className="text-slate-600 leading-relaxed">
+                    UnitSync maintains HIPAA compliance with end-to-end encryption, comprehensive audit trails,
+                    and SOC 2 Type II certification. All data is encrypted at rest and in transit using industry-standard
+                    AES-256 and TLS 1.3 protocols.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-bold text-slate-900 mb-2">System Integration</h4>
+                  <p className="text-slate-600 leading-relaxed">
+                    Our platform seamlessly integrates with all major EHR systems including Epic, Cerner, Allscripts,
+                    and MEDITECH. The RESTful API supports HL7, FHIR, and custom integration protocols with
+                    bidirectional data sync.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-bold text-slate-900 mb-2">Infrastructure</h4>
+                  <p className="text-slate-600 leading-relaxed">
+                    Hosted on enterprise-grade cloud infrastructure with 99.9% uptime SLA, automated backups
+                    every 6 hours, and disaster recovery systems across multiple geographic regions.
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-slate-300 text-center">
+                  <p className="text-slate-600 mb-4">Need the complete technical documentation?</p>
+                  <a
+                    href="/UnitSync-Technical-Information.pdf"
+                    download
+                    className="inline-block"
+                  >
+                    <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800">
+                      <FileDown className="w-5 h-5 mr-2" />
+                      Download Technical PDF
+                    </Button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
