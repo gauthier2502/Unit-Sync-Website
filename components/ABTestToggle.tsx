@@ -7,11 +7,15 @@ export const ABTestToggle: React.FC = () => {
   const location = useLocation();
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const isVariantB = location.pathname === '/variant-b';
+  const isVariantB = location.pathname === '/variant-b' || location.pathname === '/book-demo-b';
   const currentVariant = isVariantB ? 'B' : 'A';
 
   const handleToggle = () => {
-    if (isVariantB) {
+    if (location.pathname === '/book-demo-a') {
+      navigate('/book-demo-b');
+    } else if (location.pathname === '/book-demo-b') {
+      navigate('/book-demo-a');
+    } else if (location.pathname === '/variant-b') {
       navigate('/');
     } else {
       navigate('/variant-b');

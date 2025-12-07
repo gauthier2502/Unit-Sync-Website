@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Calendar } from '../components/Calendar';
 import { BookingForm } from '../components/BookingForm';
+import { ABTestToggle } from '../components/ABTestToggle';
 import { Activity, Twitter, Linkedin, Mail, MapPin } from 'lucide-react';
 
 export const BookDemoVariantB: React.FC = () => {
@@ -11,6 +12,7 @@ export const BookDemoVariantB: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 selection:bg-[#2E5BFF] selection:text-white">
       <Navbar bookingPageUrl="/book-demo-b" ctaButtonText="Start Pilot" />
+      <ABTestToggle />
 
       <main className="pt-20">
         <section className="py-12 lg:py-20">
