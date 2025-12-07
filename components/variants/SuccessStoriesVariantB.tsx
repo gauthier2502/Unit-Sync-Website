@@ -25,7 +25,7 @@ const successStories: SuccessStory[] = [
       name: 'Dr. James Peterson',
       role: 'Chief of Emergency Medicine'
     },
-    imageUrl: 'https://images.pexels.com/photos/3825517/pexels-photo-3825517.jpeg?auto=compress&cs=tinysrgb&w=800'
+    imageUrl: 'https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   {
     duration: 'Using UnitSync for 1 year',
