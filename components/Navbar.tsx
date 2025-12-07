@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './Button';
-import { NAV_ITEMS } from '../constants';
+import { NAV_ITEMS } from '../config';
 import { Menu, Activity } from 'lucide-react';
 
 interface NavbarProps {
