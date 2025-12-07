@@ -55,7 +55,7 @@ export const InsideDashboard: React.FC = () => {
                   <img
                     src={feature.image}
                     alt={feature.alt}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover scale-125"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
                       e.currentTarget.parentElement!.innerHTML = '<div class="flex items-center justify-center w-full h-full bg-slate-100 text-slate-400"><span class="text-sm">Dashboard Preview</span></div>';
