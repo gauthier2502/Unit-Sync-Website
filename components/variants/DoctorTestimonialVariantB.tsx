@@ -4,7 +4,7 @@ import { Quote, Star } from 'lucide-react';
 const testimonials = [
   {
     quote: "UnitSync has revolutionized how we manage patient flow. We've reduced ER wait times by 40% and our staff burnout has decreased significantly. It's the most impactful technology we've implemented in the last decade.",
-    author: "Dr. James Wilson",
+    author: "Dr. Sandra Wilson",
     role: "Chief of Emergency Medicine",
     hospital: "Metropolitan General Hospital",
     image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1964&auto=format&fit=crop",
