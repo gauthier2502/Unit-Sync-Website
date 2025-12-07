@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { DashboardMockup } from '../components/DashboardMockup';
-import { FeaturesGrid } from '../components/FeaturesGrid';
+import { HowUnitSyncWorksVariantB } from '../components/variants/HowUnitSyncWorksVariantB';
 import { InsideDashboardVariantB } from '../components/variants/InsideDashboardVariantB';
 import { DoctorTestimonialVariantB } from '../components/variants/DoctorTestimonialVariantB';
 import { SuccessStoriesVariantB } from '../components/variants/SuccessStoriesVariantB';
@@ -84,9 +84,9 @@ export const VariantB: React.FC = () => {
           </div>
         </section>
 
-        {/* FEATURES SECTION */}
+        {/* HOW IT WORKS SECTION */}
         <div id="features" className="scroll-mt-28">
-            <FeaturesGrid />
+            <HowUnitSyncWorksVariantB />
         </div>
 
         {/* INSIDE DASHBOARD SECTION */}
