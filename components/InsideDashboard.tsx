@@ -1,4 +1,5 @@
 import React from 'react';
+import { Play } from 'lucide-react';
 
 export const InsideDashboard: React.FC = () => {
   const dashboardFeatures = [
@@ -51,7 +52,7 @@ export const InsideDashboard: React.FC = () => {
               </div>
 
               <div className="px-6 pb-6">
-                <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm aspect-[16/10] flex items-center justify-center">
+                <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm aspect-[16/10] flex items-center justify-center relative group cursor-pointer">
                   <img
                     src={feature.image}
                     alt={feature.alt}
@@ -61,6 +62,11 @@ export const InsideDashboard: React.FC = () => {
                       e.currentTarget.parentElement!.innerHTML = '<div class="flex items-center justify-center w-full h-full bg-slate-100 text-slate-400"><span class="text-sm">Dashboard Preview</span></div>';
                     }}
                   />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-white/95 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
+                      <Play className="w-8 h-8 text-[#2E5BFF] ml-1" fill="currentColor" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
