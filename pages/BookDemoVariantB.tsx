@@ -25,7 +25,7 @@ export const BookDemoVariantB: React.FC = () => {
               </div>
 
               <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-                Book Your <span className="text-[#2E5BFF]">Free Demo</span>
+                Discuss your 3-Month <span className="text-[#2E5BFF]">Pilot Program</span>
               </h1>
 
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
