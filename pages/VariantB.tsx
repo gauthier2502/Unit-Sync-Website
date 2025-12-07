@@ -36,7 +36,7 @@ export const VariantB: React.FC = () => {
                 </div>
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-6 font-serif">
-                  Turn Disconnected Data into <span className="gradient-text">Real-Time Intelligence.</span>
+                  <span className="gradient-text">75%</span> of ER time is spent on logistics, reclaim it with predictive operations.
                 </h1>
 
                 <p className="text-lg sm:text-xl text-slate-600 mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
