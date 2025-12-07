@@ -93,10 +93,6 @@ export const Timeline: React.FC = () => {
               Start Pilot Program <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
-
-          <p className="text-sm text-slate-500 mt-6">
-            No long-term commitment required • Free pilot phase • Cancel anytime
-          </p>
         </div>
       </div>
     </section>
