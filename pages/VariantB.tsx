@@ -4,7 +4,7 @@ import { Button } from '../components/Button';
 import { DashboardMockup } from '../components/DashboardMockup';
 import { FeaturesGrid } from '../components/FeaturesGrid';
 import { InsideDashboardVariantB } from '../components/variants/InsideDashboardVariantB';
-import { DoctorTestimonial } from '../components/DoctorTestimonial';
+import { DoctorTestimonialVariantB } from '../components/variants/DoctorTestimonialVariantB';
 import { FAQSection } from '../components/FAQSection';
 import { Assistant } from '../components/Assistant';
 import { Navbar } from '../components/Navbar';
@@ -93,7 +93,7 @@ export const VariantB: React.FC = () => {
 
         {/* DOCTOR TESTIMONIAL */}
         <div id="testimonials" className="scroll-mt-28">
-            <DoctorTestimonial />
+            <DoctorTestimonialVariantB />
         </div>
 
         {/* TIMELINE SECTION - NEW FOR VARIANT B */}

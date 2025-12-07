@@ -1,91 +1,161 @@
-import React from 'react';
-import { Quote, Star } from 'lucide-react';
+import React, { useState } from 'react';
+import { Check, ArrowLeft, ArrowRight, Building2 } from 'lucide-react';
+import { Button } from '../Button';
 
 const testimonials = [
   {
-    quote: "UnitSync has revolutionized how we manage patient flow. We've reduced ER wait times by 40% and our staff burnout has decreased significantly. It's the most impactful technology we've implemented in the last decade.",
-    author: "Dr. Sandra Wilson",
-    role: "Chief of Emergency Medicine",
-    hospital: "Metropolitan General Hospital",
-    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1964&auto=format&fit=crop",
-    rating: 5,
+    id: 1,
+    headline: "Adjust protocols \nanytime with a provider",
+    bullets: [
+      "Low administrative burden to help your staff focus on treatment",
+      "Adjust your staffing levels as needed to balance patient load and burnout",
+      "Change operational protocols in partnership with department heads at any time, instantly"
+    ],
+    doctorName: "Dr. Sandra Wilson",
+    doctorRole: "SVP of Emergency Ops",
+    hospital: "Metropolitan General",
+    hospitalLogo: "MGH",
+    imageSrc: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1964&auto=format&fit=crop"
   },
   {
-    quote: "The predictive analytics are incredible. We can now anticipate patient surges 6-8 hours in advance and adjust staffing accordingly. This has been a game-changer for our operations team.",
-    author: "Dr. Sarah Chen",
-    role: "Director of Operations",
-    hospital: "Mercy Regional Medical Center",
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=1964&auto=format&fit=crop",
-    rating: 5,
-  },
+    id: 2,
+    headline: "Real-time insights for \nbetter patient outcomes",
+    bullets: [
+      "Identify bottlenecks before they become critical issues in the ER",
+      "Streamline communication between departments instantly",
+      "Data-driven decisions that save lives and optimize resources"
+    ],
+    doctorName: "Dr. Sarah Chen",
+    doctorRole: "Chief of Cardiology",
+    hospital: "Mercy Hospital",
+    hospitalLogo: "MH",
+    imageSrc: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=1964&auto=format&fit=crop"
+  }
 ];
 
 export const DoctorTestimonialVariantB: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    }
+    if (isRightSwipe) {
+      prevSlide();
+    }
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
+  const current = testimonials[currentIndex];
+
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-white overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="inline-block px-4 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-4">
-            Testimonials
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-            Trusted by healthcare leaders nationwide
-          </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            See how hospitals are transforming their operations with UnitSync
-          </p>
-        </div>
+        <div
+          className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col"
-            >
-              <Quote className="w-10 h-10 text-blue-500 mb-4 opacity-50" />
+          <div
+            className="flex-1 space-y-8 order-2 lg:order-1 animate-in fade-in slide-in-from-left-4 duration-500 fill-mode-both"
+            key={`text-${current.id}`}
+          >
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#2E5BFF] leading-[1.15] tracking-tight whitespace-pre-line">
+              {current.headline}
+            </h2>
 
-              <div className="flex mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-
-              <p className="text-slate-700 leading-relaxed mb-6 flex-1 italic">
-                "{testimonial.quote}"
-              </p>
-
-              <div className="flex items-center space-x-4 pt-4 border-t border-slate-100">
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.author}
-                  className="w-14 h-14 rounded-full object-cover"
-                />
-                <div>
-                  <div className="font-bold text-slate-900">{testimonial.author}</div>
-                  <div className="text-sm text-slate-600">{testimonial.role}</div>
-                  <div className="text-xs text-slate-500">{testimonial.hospital}</div>
+            <div className="space-y-5">
+              {current.bullets.map((item, i) => (
+                <div key={i} className="flex items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center">
+                        <Check className="w-3.5 h-3.5 text-orange-600 stroke-[3]" />
+                    </div>
+                  </div>
+                  <p className="ml-4 text-lg text-slate-700 font-medium leading-snug">{item}</p>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center space-x-2 text-slate-600">
-            <div className="flex -space-x-2">
-              {testimonials.map((t, i) => (
-                <img
-                  key={i}
-                  src={t.image}
-                  alt=""
-                  className="w-10 h-10 rounded-full border-2 border-white"
-                />
               ))}
             </div>
-            <span className="text-sm font-medium">
-              Join <span className="font-bold text-slate-900">50+ hospitals</span> already using UnitSync
-            </span>
+
+            <div className="pt-6 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+              <Button size="lg" className="rounded-full px-10 py-4 shadow-xl shadow-blue-500/20">
+                Learn More
+              </Button>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={prevSlide}
+                  className="w-12 h-12 flex items-center justify-center rounded-full border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95"
+                  aria-label="Previous testimonial"
+                >
+                  <ArrowLeft className="w-5 h-5 text-slate-600" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="w-12 h-12 flex items-center justify-center rounded-full border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95"
+                  aria-label="Next testimonial"
+                >
+                  <ArrowRight className="w-5 h-5 text-slate-600" />
+                </button>
+              </div>
+            </div>
           </div>
+
+          <div
+            className="flex-1 w-full order-1 lg:order-2 animate-in fade-in slide-in-from-right-4 duration-500 fill-mode-both"
+            key={`img-${current.id}`}
+          >
+            <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-[#F3F0E7]">
+               <img
+                 src={current.imageSrc}
+                 alt={current.doctorName}
+                 className="w-full h-full object-cover object-top"
+               />
+
+               <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl shadow-lg border border-white/50 animate-in slide-in-from-bottom-4 fade-in duration-700 delay-150 fill-mode-both">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="font-bold text-slate-900 text-lg">{current.doctorName}</div>
+                      <div className="text-sm text-slate-600 mt-0.5">{current.doctorRole}</div>
+                      <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-500">
+                        <Building2 className="w-3.5 h-3.5" />
+                        <span>{current.hospital}</span>
+                      </div>
+                    </div>
+                    <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-md">
+                      <span className="text-white font-bold text-sm">{current.hospitalLogo}</span>
+                    </div>
+                  </div>
+               </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
