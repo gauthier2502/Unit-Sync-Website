@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, FileDown } from 'lucide-react';
 import { FAQS } from '../constants';
+import { Button } from './Button';
 
 export const FAQSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -26,7 +27,7 @@ export const FAQSection: React.FC = () => {
                   className="flex items-start text-left w-full group focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <div 
+                  <div
                     className={`flex-shrink-0 mt-1 w-6 h-6 rounded-full flex items-center justify-center mr-4 transition-colors duration-200 ${
                       isOpen ? 'bg-[#2E5BFF]' : 'bg-slate-900 group-hover:bg-slate-700'
                     }`}
@@ -41,8 +42,8 @@ export const FAQSection: React.FC = () => {
                     {faq.question}
                   </span>
                 </button>
-                
-                <div 
+
+                <div
                   className={`grid transition-all duration-300 ease-in-out ${
                     isOpen ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'
                   }`}
@@ -56,6 +57,23 @@ export const FAQSection: React.FC = () => {
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-16 flex flex-col items-center">
+          <div className="text-center mb-6">
+            <h3 className="text-2xl font-bold text-slate-900 mb-2">Need more technical details?</h3>
+            <p className="text-slate-600">Download our comprehensive technical documentation</p>
+          </div>
+          <a
+            href="/UnitSync-Technical-Information.pdf"
+            download
+            className="inline-block"
+          >
+            <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800">
+              <FileDown className="w-5 h-5 mr-2" />
+              Download Technical PDF
+            </Button>
+          </a>
         </div>
       </div>
     </section>
