@@ -43,8 +43,6 @@ UnitSync is a comprehensive hospital intelligence solution that provides:
 - **Supabase** - Backend as a Service (Database, Auth, Storage)
 - **PostgreSQL** - Relational database (via Supabase)
 
-### AI Integration
-- **Google Gemini AI** - Conversational AI assistant
 
 ## Prerequisites
 
