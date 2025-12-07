@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Play, Pause, Zap, BarChart2, Calendar, PieChart, MoreHorizontal } from 'lucide-react';
+import { ArrowRight, Zap, MoreHorizontal } from 'lucide-react';
 import { AreaChart, Area, BarChart, Bar, ResponsiveContainer, XAxis, Tooltip } from 'recharts';
 
 const FeatureCard = ({ 
@@ -38,7 +38,7 @@ export const FeaturesGrid = () => {
       {/* Header */}
       <div className="text-center mb-16 space-y-2">
         <h2 className="text-4xl md:text-5xl font-serif font-bold text-slate-900">
-          Five smart features administrators love.
+          Four smart features administrators love.
         </h2>
         <p className="text-xl text-slate-500 font-serif italic">
           (Discover many more in the dashboard.)
@@ -173,56 +173,12 @@ export const FeaturesGrid = () => {
           </div>
         </FeatureCard>
 
-        {/* Row 3: Smart Handoffs (Timeline) */}
-        <FeatureCard 
-          title="Smart Handoffs"
-          description="Access AI-generated shift recaps, critical patient KPIs, and the actual audio of the doctor's handover briefing—all without leaving UnitSync."
-          cta="Learn more"
-        >
-          <div className="w-full h-64 bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] p-6 border border-b-0 border-slate-200 relative flex flex-col">
-             <div className="flex justify-between items-center mb-6">
-                 <div className="flex items-center space-x-3">
-                     <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white">
-                         <Play className="w-4 h-4 fill-current ml-0.5" />
-                     </div>
-                     <div>
-                         <div className="text-sm font-bold text-slate-900">Morning Handoff</div>
-                         <div className="text-xs text-slate-500">Dr. Sarah • 07:00 AM</div>
-                     </div>
-                 </div>
-                 <div className="text-xs font-mono text-slate-400">14:20</div>
-             </div>
-
-             {/* Waveform Visualization */}
-             <div className="flex items-center justify-between space-x-1 h-12 mb-4 px-2">
-                 {[40, 60, 30, 80, 50, 90, 40, 60, 70, 40, 30, 60, 40, 80, 50, 70, 40, 20].map((h, i) => (
-                     <div
-                        key={i}
-                        className={`w-1.5 rounded-full ${i < 7 ? 'bg-[#2E5BFF]' : 'bg-slate-200'}`}
-                        style={{
-                            height: `${h}%`,
-                            transform: `scaleY(${i < 7 ? 1 : 0.8})`
-                        }}
-                     ></div>
-                 ))}
-             </div>
-
-             <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                 <div className="flex items-start space-x-2">
-                     <div className="mt-1 w-2 h-2 rounded-full bg-[#2E5BFF] flex-shrink-0 animate-pulse"></div>
-                     <p className="text-xs text-slate-600 leading-snug">
-                         <span className="font-bold text-slate-800">Summary:</span> ICU capacity at 90%. 3 discharges pending approval. Bed 4 requires cardio consult ASAP.
-                     </p>
-                 </div>
-             </div>
-          </div>
-        </FeatureCard>
-
         {/* Row 3: Staffing Plans (Pie) */}
-        <FeatureCard 
+        <FeatureCard
           title="Staffing Plans"
           description="Schedule recurring shift patterns for specialized teams. Create automated plans for residents, attendings, and nurses to ensure 24/7 coverage."
           cta="Learn more"
+          width="full"
         >
            <div className="w-full h-64 bg-white rounded-t-xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] p-6 border border-b-0 border-slate-200 relative flex flex-col items-center justify-center">
              <div className="absolute top-4 right-4">
