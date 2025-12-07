@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, FileDown } from 'lucide-react';
-import { FAQS } from '../config';
-import { useFAQ } from '../hooks';
+import { FAQS } from '../constants';
 import { Button } from './Button';
 
 export const FAQSection: React.FC = () => {
-  const { toggleFAQ, isOpen: isFAQOpen } = useFAQ(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
     <section className="py-24 bg-white">
@@ -16,7 +19,7 @@ export const FAQSection: React.FC = () => {
 
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-10">
           {FAQS.map((faq, index) => {
-            const isOpen = isFAQOpen(index);
+            const isOpen = openIndex === index;
             return (
               <div key={index} className="flex flex-col items-start">
                 <button

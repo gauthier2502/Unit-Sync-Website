@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, FileDown, Shield } from 'lucide-react';
-import { FAQS } from '../../config';
-import { useFAQ, useToggle } from '../../hooks';
+import { FAQS } from '../../constants';
 import { Button } from '../Button';
 
 export const FAQSectionVariantB: React.FC = () => {
-  const { toggleFAQ, isOpen: isFAQOpen } = useFAQ(0);
-  const { isOpen: isOverviewOpen, toggle: toggleOverview } = useToggle(false);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [isOverviewOpen, setIsOverviewOpen] = useState(false);
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
     <section className="py-24 bg-white">
@@ -17,7 +20,7 @@ export const FAQSectionVariantB: React.FC = () => {
 
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-10">
           {FAQS.map((faq, index) => {
-            const isOpen = isFAQOpen(index);
+            const isOpen = openIndex === index;
             return (
               <div key={index} className="flex flex-col items-start">
                 <button
@@ -59,7 +62,7 @@ export const FAQSectionVariantB: React.FC = () => {
 
         <div className="mt-16 flex flex-col items-center">
           <button
-            onClick={toggleOverview}
+            onClick={() => setIsOverviewOpen(!isOverviewOpen)}
             className="flex items-center gap-2 text-slate-700 hover:text-slate-900 transition-colors group"
           >
             <Shield className="w-5 h-5" />
