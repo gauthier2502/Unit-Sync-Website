@@ -26,18 +26,6 @@ const testimonials = [
     doctorName: "Dr. Sarah Chen",
     doctorRole: "Chief of Cardiology, Mercy Hospital",
     imageSrc: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=1964&auto=format&fit=crop"
-  },
-  {
-    id: 3,
-    headline: "Seamless integration with \nyour existing workflow",
-    bullets: [
-      "No complex training required for your staff to get started",
-      "Works alongside your current EHR system without replacement",
-      "Automated reporting saves hours of administrative work daily"
-    ],
-    doctorName: "Dr. Marcus Reynolds",
-    doctorRole: "Clinical Director, St. Mary's",
-    imageSrc: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1964&auto=format&fit=crop"
   }
 ];
 

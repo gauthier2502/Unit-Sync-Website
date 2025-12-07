@@ -18,14 +18,6 @@ const testimonials = [
     image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=1964&auto=format&fit=crop",
     rating: 5,
   },
-  {
-    quote: "Implementation was seamless and the ROI was clear within the first quarter. UnitSync integrates perfectly with our existing systems and the support team is outstanding.",
-    author: "Dr. Marcus Reynolds",
-    role: "Chief Information Officer",
-    hospital: "St. Mary's Hospital",
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1964&auto=format&fit=crop",
-    rating: 5,
-  },
 ];
 
 export const DoctorTestimonialVariantB: React.FC = () => {
