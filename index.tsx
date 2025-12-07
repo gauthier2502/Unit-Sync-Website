@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ABTestProvider } from './contexts/ABTestContext';
 import { VariantA } from './pages/VariantA';
 import { VariantB } from './pages/VariantB';
+import { BookDemo } from './pages/BookDemo';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) throw new Error('Failed to find the root element');
@@ -17,6 +18,7 @@ root.render(
         <Routes>
           <Route path="/" element={<VariantA />} />
           <Route path="/variant-b" element={<VariantB />} />
+          <Route path="/book-demo" element={<BookDemo />} />
         </Routes>
       </BrowserRouter>
     </ABTestProvider>

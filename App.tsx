@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from './components/Button';
 import { DashboardMockup } from './components/DashboardMockup';
 import { FeaturesGrid } from './components/FeaturesGrid';
@@ -7,68 +8,14 @@ import { InsideDashboard } from './components/InsideDashboard';
 import { DoctorTestimonial } from './components/DoctorTestimonial';
 import { FAQSection } from './components/FAQSection';
 import { Assistant } from './components/Assistant';
-import { NAV_ITEMS } from './constants';
-import { Menu, ShieldCheck, Activity, Twitter, Linkedin, Mail, MapPin, Wifi, ArrowRight } from 'lucide-react';
+import { Navbar } from './components/Navbar';
+import { ShieldCheck, Activity, Twitter, Linkedin, Mail, MapPin, Wifi, ArrowRight } from 'lucide-react';
 
 function App() {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-
   return (
     <div className="min-h-screen bg-white selection:bg-[#2E5BFF] selection:text-white">
-      
-      {/* Header */}
-      <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-40 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            {/* Logo */}
-            <div className="flex items-center space-x-2 cursor-pointer" onClick={() => window.scrollTo(0,0)}>
-              <div className="w-8 h-8 bg-[#2E5BFF] rounded-lg flex items-center justify-center">
-                <Activity className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-bold text-xl text-slate-900 tracking-tight">UnitSync</span>
-            </div>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex space-x-8">
-              {NAV_ITEMS.map((item) => (
-                <a key={item.label} href={item.href} className="text-slate-600 hover:text-[#2E5BFF] font-medium transition-colors">
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-
-            {/* CTA & Mobile Toggle */}
-            <div className="flex items-center space-x-4">
-              <Button size="sm" className="hidden md:inline-flex">Get a Demo</Button>
-              <button 
-                className="md:hidden text-slate-600"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                <Menu className="w-6 h-6" />
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-slate-100 p-4 absolute w-full shadow-xl animate-in slide-in-from-top-2 duration-200">
-             <nav className="flex flex-col space-y-4">
-              {NAV_ITEMS.map((item) => (
-                <a 
-                  key={item.label} 
-                  href={item.href} 
-                  className="text-slate-600 font-medium py-2 hover:text-[#2E5BFF]"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
-              <Button className="w-full">Get a Demo</Button>
-            </nav>
-          </div>
-        )}
-      </header>
+      <Navbar />
 
       <main className="pt-20">
         
@@ -99,7 +46,9 @@ function App() {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
-                  <Button size="lg" withIcon className="w-full sm:w-auto">Request a Demo</Button>
+                  <Link to="/book-demo">
+                    <Button size="lg" withIcon className="w-full sm:w-auto">Request a Demo</Button>
+                  </Link>
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">View ROI Calculator</Button>
                 </div>
                 
@@ -181,12 +130,16 @@ function App() {
               </p>
               
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full sm:w-auto">
-                <Button size="lg" className="!bg-[#2E5BFF] !text-white hover:!bg-blue-600 shadow-xl shadow-blue-500/30 w-full sm:w-auto px-8 py-4 h-auto text-lg">
-                  Get started <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-                <Button size="lg" variant="outline" className="bg-white border-slate-200 text-slate-900 hover:bg-slate-50 w-full sm:w-auto px-8 py-4 h-auto text-lg shadow-sm">
-                  Talk to us
-                </Button>
+                <Link to="/book-demo">
+                  <Button size="lg" className="!bg-[#2E5BFF] !text-white hover:!bg-blue-600 shadow-xl shadow-blue-500/30 w-full sm:w-auto px-8 py-4 h-auto text-lg">
+                    Get started <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+                <Link to="/book-demo">
+                  <Button size="lg" variant="outline" className="bg-white border-slate-200 text-slate-900 hover:bg-slate-50 w-full sm:w-auto px-8 py-4 h-auto text-lg shadow-sm">
+                    Talk to us
+                  </Button>
+                </Link>
               </div>
            </div>
         </section>
