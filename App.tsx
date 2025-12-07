@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="min-h-screen bg-white selection:bg-[#2E5BFF] selection:text-white">
 
-      <Navbar />
+      <Navbar bookingPageUrl="/book-demo-a" />
 
       <main className="pt-20">
         
@@ -46,7 +46,7 @@ function App() {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
-                  <Link to="/book-demo">
+                  <Link to="/book-demo-a">
                     <Button size="lg" withIcon className="w-full sm:w-auto">Request a Demo</Button>
                   </Link>
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">View ROI Calculator</Button>
@@ -130,12 +130,12 @@ function App() {
               </p>
               
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full sm:w-auto">
-                <Link to="/book-demo">
+                <Link to="/book-demo-a">
                   <Button size="lg" className="!bg-[#2E5BFF] !text-white hover:!bg-blue-600 shadow-xl shadow-blue-500/30 w-full sm:w-auto px-8 py-4 h-auto text-lg">
                     Get started <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
-                <Link to="/book-demo">
+                <Link to="/book-demo-a">
                   <Button size="lg" variant="outline" className="bg-white border-slate-200 text-slate-900 hover:bg-slate-50 w-full sm:w-auto px-8 py-4 h-auto text-lg shadow-sm">
                     Talk to us
                   </Button>

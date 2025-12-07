@@ -6,9 +6,10 @@ import { Menu, Activity } from 'lucide-react';
 
 interface NavbarProps {
   ctaButtonText?: string;
+  bookingPageUrl?: string;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ ctaButtonText = 'Get a Demo' }) => {
+export const Navbar: React.FC<NavbarProps> = ({ ctaButtonText = 'Get a Demo', bookingPageUrl = '/book-demo-a' }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   return (
@@ -31,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({ ctaButtonText = 'Get a Demo' }) 
           </nav>
 
           <div className="flex items-center space-x-4">
-            <Link to="/book-demo">
+            <Link to={bookingPageUrl}>
               <Button size="sm" className="hidden md:inline-flex">{ctaButtonText}</Button>
             </Link>
             <button
@@ -57,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ ctaButtonText = 'Get a Demo' }) 
                 {item.label}
               </a>
             ))}
-            <Link to="/book-demo">
+            <Link to={bookingPageUrl}>
               <Button className="w-full">{ctaButtonText}</Button>
             </Link>
           </nav>
