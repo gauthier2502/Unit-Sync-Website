@@ -11,9 +11,9 @@ const testimonials = [
       "Adjust your staffing levels as needed to balance patient load and burnout",
       "Change operational protocols in partnership with department heads at any time, instantly"
     ],
-    doctorName: "Dr. James Wilson",
+    doctorName: "Dr. Emily Martinez",
     doctorRole: "SVP of Emergency Ops, UnitSync",
-    imageSrc: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1964&auto=format&fit=crop"
+    imageSrc: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=1964&auto=format&fit=crop"
   },
   {
     id: 2,
