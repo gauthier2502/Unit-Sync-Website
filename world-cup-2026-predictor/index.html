@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Cup 2026 Predictor ⚽</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>⚽ World Cup 2026 Predictor</h1>
+    <p class="subtitle">
+      Elo-based expected-goals model with Monte&nbsp;Carlo tournament simulation.
+    </p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="sim">🏆 Tournament Simulation</button>
+    <button class="tab" data-tab="h2h">🔮 Head-to-Head</button>
+    <button class="tab" data-tab="teams">📋 Teams &amp; Groups</button>
+  </nav>
+
+  <!-- ----------------------------------------------------------------- -->
+  <section id="sim" class="panel active">
+    <div class="controls">
+      <label for="numSims">Simulations:</label>
+      <select id="numSims">
+        <option value="2000">2,000 (fast)</option>
+        <option value="10000" selected>10,000 (default)</option>
+        <option value="25000">25,000 (slow)</option>
+      </select>
+      <button id="runBtn">Run simulation</button>
+    </div>
+
+    <div id="progressWrap" class="progress-wrap hidden">
+      <div id="progressBar" class="progress-bar"></div>
+      <span id="progressText">0%</span>
+    </div>
+
+    <p id="simMeta" class="meta"></p>
+
+    <table id="resultsTable" class="results hidden">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Team</th>
+          <th>Grp</th>
+          <th>Elo</th>
+          <th>Champion</th>
+          <th>Final</th>
+          <th>Semifinal</th>
+          <th>Quarterfinal</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- ----------------------------------------------------------------- -->
+  <section id="h2h" class="panel">
+    <div class="controls">
+      <select id="teamA"></select>
+      <span class="vs">vs</span>
+      <select id="teamB"></select>
+      <button id="predictBtn">Predict</button>
+    </div>
+    <div id="h2hResult" class="h2h-result"></div>
+  </section>
+
+  <!-- ----------------------------------------------------------------- -->
+  <section id="teams" class="panel">
+    <div id="groupsGrid" class="groups-grid"></div>
+  </section>
+
+  <footer>
+    <p>
+      Model ported from
+      <a href="https://github.com/chrispathway/world-cup-prediction-py" target="_blank" rel="noopener">chrispathway/world-cup-prediction-py</a>.
+      Elo ratings are approximate seeds &mdash; predictions are for fun, not betting.
+    </p>
+  </footer>
+
+  <script src="model.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
