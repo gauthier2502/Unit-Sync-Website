@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>World Cup 2026 Predictor ⚽</title>
+<style>
+:root{--bg:#0f1724;--panel:#16213a;--panel-2:#1d2b4a;--accent:#36c2a4;--accent-2:#ffd24a;--text:#e8eef7;--muted:#93a2bd;--line:#2a3a5e;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1200px 600px at 50% -10%,#1b2a4d 0%,var(--bg) 60%);color:var(--text);min-height:100vh;}
+header{text-align:center;padding:2.2rem 1rem 1rem;}
+header h1{margin:0;font-size:2rem;letter-spacing:-0.5px;}
+.subtitle{color:var(--muted);margin:0.4rem 0 0;}
+.tabs{display:flex;justify-content:center;gap:0.5rem;flex-wrap:wrap;padding:0 1rem;}
+.tab{background:var(--panel);color:var(--muted);border:1px solid var(--line);padding:0.6rem 1.1rem;border-radius:999px;cursor:pointer;font-size:0.95rem;transition:all .15s ease;}
+.tab:hover{color:var(--text);}
+.tab.active{background:var(--accent);color:#04241d;border-color:var(--accent);font-weight:600;}
+.panel{display:none;max-width:920px;margin:1.4rem auto;padding:1.2rem;background:var(--panel);border:1px solid var(--line);border-radius:14px;}
+.panel.active{display:block;}
+.controls{display:flex;align-items:center;gap:0.7rem;flex-wrap:wrap;margin-bottom:1rem;}
+select,button{font-size:0.95rem;padding:0.55rem 0.8rem;border-radius:9px;border:1px solid var(--line);background:var(--panel-2);color:var(--text);}
+button{cursor:pointer;background:var(--accent);color:#04241d;font-weight:600;border-color:var(--accent);}
+button:disabled{opacity:0.5;cursor:not-allowed;}
+.vs{color:var(--muted);font-weight:600;}
+.meta{color:var(--muted);font-size:0.85rem;min-height:1rem;}
+.progress-wrap{position:relative;height:22px;background:var(--panel-2);border-radius:999px;overflow:hidden;margin-bottom:0.8rem;}
+.progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .1s linear;}
+.progress-wrap span{position:absolute;inset:0;display:grid;place-items:center;font-size:0.78rem;color:#04241d;font-weight:700;}
+.hidden{display:none !important;}
+table.results{width:100%;border-collapse:collapse;font-size:0.92rem;}
+table.results th,table.results td{padding:0.5rem 0.5rem;text-align:right;border-bottom:1px solid var(--line);}
+table.results th:nth-child(2),table.results td:nth-child(2){text-align:left;}
+table.results th{color:var(--muted);font-weight:600;}
+table.results tbody tr:hover{background:var(--panel-2);}
+.bar-cell{position:relative;min-width:92px;}
+.bar-cell .fill{position:absolute;left:0;top:4px;bottom:4px;background:rgba(54,194,164,0.25);border-radius:4px;}
+.bar-cell .val{position:relative;}
+.h2h-result{margin-top:0.6rem;}
+.h2h-bars{display:flex;height:36px;border-radius:9px;overflow:hidden;border:1px solid var(--line);}
+.h2h-bars div{display:grid;place-items:center;font-size:0.8rem;font-weight:700;color:#04241d;white-space:nowrap;}
+.seg-a{background:var(--accent);}
+.seg-d{background:#5b6b8c;color:var(--text);}
+.seg-b{background:var(--accent-2);}
+.h2h-line{display:flex;justify-content:space-between;font-size:1.1rem;font-weight:600;margin-bottom:0.7rem;}
+.h2h-xg{color:var(--muted);font-size:0.9rem;margin-top:0.6rem;text-align:center;}
+.groups-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.8rem;}
+.group-card{background:var(--panel-2);border:1px solid var(--line);border-radius:11px;padding:0.7rem 0.85rem;}
+.group-card h3{margin:0 0 0.5rem;font-size:1rem;}
+.group-card .row{display:flex;justify-content:space-between;padding:0.22rem 0;font-size:0.9rem;}
+.group-card .row .elo{color:var(--muted);}
+footer{text-align:center;color:var(--muted);font-size:0.82rem;padding:1.5rem 1rem 2.5rem;max-width:700px;margin:0 auto;}
+footer a{color:var(--accent);}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚽ World Cup 2026 Predictor</h1>
+  <p class="subtitle">Elo-based expected-goals model with Monte&nbsp;Carlo tournament simulation.</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="sim">🏆 Tournament Simulation</button>
+  <button class="tab" data-tab="h2h">🔮 Head-to-Head</button>
+  <button class="tab" data-tab="teams">📋 Teams &amp; Groups</button>
+</nav>
+
+<section id="sim" class="panel active">
+  <div class="controls">
+    <label for="numSims">Simulations:</label>
+    <select id="numSims">
+      <option value="2000">2,000 (fast)</option>
+      <option value="10000" selected>10,000 (default)</option>
+      <option value="25000">25,000 (slow)</option>
+    </select>
+    <button id="runBtn">Run simulation</button>
+  </div>
+  <div id="progressWrap" class="progress-wrap hidden">
+    <div id="progressBar" class="progress-bar"></div>
+    <span id="progressText">0%</span>
+  </div>
+  <p id="simMeta" class="meta"></p>
+  <table id="resultsTable" class="results hidden">
+    <thead><tr><th>#</th><th>Team</th><th>Grp</th><th>Elo</th><th>Champion</th><th>Final</th><th>Semifinal</th><th>Quarterfinal</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section id="h2h" class="panel">
+  <div class="controls">
+    <select id="teamA"></select>
+    <span class="vs">vs</span>
+    <select id="teamB"></select>
+    <button id="predictBtn">Predict</button>
+  </div>
+  <div id="h2hResult" class="h2h-result"></div>
+</section>
+
+<section id="teams" class="panel">
+  <div id="groupsGrid" class="groups-grid"></div>
+</section>
+
+<footer>
+  <p>Model ported from
+    <a href="https://github.com/chrispathway/world-cup-prediction-py" target="_blank" rel="noopener">chrispathway/world-cup-prediction-py</a>.
+    Elo ratings are approximate seeds &mdash; predictions are for fun, not betting.</p>
+</footer>
+
+<script>
+/* ===================== MODEL ===================== */
+var TEAMS=[
+{name:"Mexico",flag:"🇲🇽",group:"A",elo:1880},{name:"South Africa",flag:"🇿🇦",group:"A",elo:1700},{name:"South Korea",flag:"🇰🇷",group:"A",elo:1790},{name:"Czech Republic",flag:"🇨🇿",group:"A",elo:1790},
+{name:"Canada",flag:"🇨🇦",group:"B",elo:1780},{name:"Bosnia & Herz.",flag:"🇧🇦",group:"B",elo:1720},{name:"Qatar",flag:"🇶🇦",group:"B",elo:1680},{name:"Switzerland",flag:"🇨🇭",group:"B",elo:1860},
+{name:"Brazil",flag:"🇧🇷",group:"C",elo:2030},{name:"Morocco",flag:"🇲🇦",group:"C",elo:1840},{name:"Haiti",flag:"🇭🇹",group:"C",elo:1500},{name:"Scotland",flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",group:"C",elo:1780},
+{name:"USA",flag:"🇺🇸",group:"D",elo:1820},{name:"Paraguay",flag:"🇵🇾",group:"D",elo:1760},{name:"Australia",flag:"🇦🇺",group:"D",elo:1740},{name:"Turkey",flag:"🇹🇷",group:"D",elo:1820},
+{name:"Germany",flag:"🇩🇪",group:"E",elo:1930},{name:"Curaçao",flag:"🇨🇼",group:"E",elo:1500},{name:"Ivory Coast",flag:"🇨🇮",group:"E",elo:1770},{name:"Ecuador",flag:"🇪🇨",group:"E",elo:1820},
+{name:"Netherlands",flag:"🇳🇱",group:"F",elo:1990},{name:"Japan",flag:"🇯🇵",group:"F",elo:1850},{name:"Sweden",flag:"🇸🇪",group:"F",elo:1790},{name:"Tunisia",flag:"🇹🇳",group:"F",elo:1690},
+{name:"Belgium",flag:"🇧🇪",group:"G",elo:1930},{name:"Egypt",flag:"🇪🇬",group:"G",elo:1740},{name:"Iran",flag:"🇮🇷",group:"G",elo:1800},{name:"New Zealand",flag:"🇳🇿",group:"G",elo:1600},
+{name:"Spain",flag:"🇪🇸",group:"H",elo:2080},{name:"Cape Verde",flag:"🇨🇻",group:"H",elo:1600},{name:"Saudi Arabia",flag:"🇸🇦",group:"H",elo:1670},{name:"Uruguay",flag:"🇺🇾",group:"H",elo:1900},
+{name:"France",flag:"🇫🇷",group:"I",elo:2080},{name:"Senegal",flag:"🇸🇳",group:"I",elo:1830},{name:"Iraq",flag:"🇮🇶",group:"I",elo:1660},{name:"Norway",flag:"🇳🇴",group:"I",elo:1820},
+{name:"Argentina",flag:"🇦🇷",group:"J",elo:2140},{name:"Algeria",flag:"🇩🇿",group:"J",elo:1780},{name:"Austria",flag:"🇦🇹",group:"J",elo:1810},{name:"Jordan",flag:"🇯🇴",group:"J",elo:1620},
+{name:"Portugal",flag:"🇵🇹",group:"K",elo:1990},{name:"DR Congo",flag:"🇨🇩",group:"K",elo:1720},{name:"Uzbekistan",flag:"🇺🇿",group:"K",elo:1700},{name:"Colombia",flag:"🇨🇴",group:"K",elo:1880},
+{name:"England",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",group:"L",elo:2010},{name:"Croatia",flag:"🇭🇷",group:"L",elo:1870},{name:"Ghana",flag:"🇬🇭",group:"L",elo:1720},{name:"Panama",flag:"🇵🇦",group:"L",elo:1640}
+];
+var GROUP_NAMES=["A","B","C","D","E","F","G","H","I","J","K","L"];
+
+function expectedGoals(eloA,eloB){
+  var diff=(eloA-eloB)/400;
+  var mult=Math.pow(10,diff);
+  var ratio=Math.min(Math.max(Math.sqrt(mult),0.33),3);
+  var xgA=(2.5*ratio)/(1+ratio);
+  return [xgA,2.5-xgA];
+}
+function poissonSample(lambda){var L=Math.exp(-lambda),k=0,p=1;do{k++;p*=Math.random();}while(p>L);return k-1;}
+function poissonPmf(k,lambda){var lp=-lambda+k*Math.log(lambda);for(var i=2;i<=k;i++)lp-=Math.log(i);return Math.exp(lp);}
+function sampleMatch(eloA,eloB){var xg=expectedGoals(eloA,eloB);return [poissonSample(xg[0]),poissonSample(xg[1])];}
+function knockoutWinnerA(a,b){var g=sampleMatch(a.elo,b.elo);if(g[0]>g[1])return true;if(g[1]>g[0])return false;var pen=Math.min(0.6,0.5+(a.elo-b.elo)/2000);return Math.random()<pen;}
+function headToHead(a,b){
+  var xg=expectedGoals(a.elo,b.elo),MAX=12,pA=0,pD=0,pB=0;
+  for(var i=0;i<=MAX;i++){var pi=poissonPmf(i,xg[0]);for(var j=0;j<=MAX;j++){var pj=poissonPmf(j,xg[1]),pr=pi*pj;if(i>j)pA+=pr;else if(i<j)pB+=pr;else pD+=pr;}}
+  return {xgA:xg[0],xgB:xg[1],winA:pA,draw:pD,winB:pB};
+}
+function compareStandings(x,y){
+  if(y.pts!==x.pts)return y.pts-x.pts;
+  var xgd=x.gf-x.ga,ygd=y.gf-y.ga;
+  if(ygd!==xgd)return ygd-xgd;
+  if(y.gf!==x.gf)return y.gf-x.gf;
+  return y.team.elo-x.team.elo;
+}
+function simulateTournament(){
+  var stage={};
+  function set(t,c){stage[t.name]=c;}
+  var groups={};
+  for(var g=0;g<GROUP_NAMES.length;g++)groups[GROUP_NAMES[g]]=[];
+  for(var t=0;t<TEAMS.length;t++){var tm=TEAMS[t];groups[tm.group].push({team:tm,pts:0,gf:0,ga:0});}
+  var winners=[],runners=[],thirds=[];
+  for(var gi=0;gi<GROUP_NAMES.length;gi++){
+    var tb=groups[GROUP_NAMES[gi]];
+    for(var a=0;a<tb.length;a++)for(var b=a+1;b<tb.length;b++){
+      var r=sampleMatch(tb[a].team.elo,tb[b].team.elo);
+      tb[a].gf+=r[0];tb[a].ga+=r[1];tb[b].gf+=r[1];tb[b].ga+=r[0];
+      if(r[0]>r[1])tb[a].pts+=3;else if(r[1]>r[0])tb[b].pts+=3;else{tb[a].pts++;tb[b].pts++;}
+    }
+    tb.sort(compareStandings);
+    set(tb[0].team,"groups");set(tb[1].team,"groups");set(tb[2].team,"groups");set(tb[3].team,"groups");
+    winners.push(tb[0]);runners.push(tb[1]);thirds.push(tb[2]);
+  }
+  thirds.sort(compareStandings);
+  var best=thirds.slice(0,8);
+  var field=[];
+  for(var w=0;w<winners.length;w++)field.push(winners[w].team);
+  for(var ru=0;ru<runners.length;ru++)field.push(runners[ru].team);
+  for(var c=0;c<best.length;c++)field.push(best[c].team);
+  field.sort(function(x,y){return y.elo-x.elo;});
+  var round=[],n=field.length;
+  for(var s=0;s<n/2;s++)round.push([field[s],field[n-1-s]]);
+  for(var f=0;f<field.length;f++)set(field[f],"round32");
+  var order=["round16","quarterfinal","semifinal","final","champion"],idx=0;
+  while(round.length>1){
+    var next=[],code=order[idx];
+    for(var m=0;m<round.length;m++){var p=round[m];var aw=knockoutWinnerA(p[0],p[1]);var win=aw?p[0]:p[1];set(win,code);next.push(win);}
+    var paired=[];for(var pp=0;pp<next.length;pp+=2)paired.push([next[pp],next[pp+1]]);
+    round=paired;idx++;
+  }
+  if(round.length===1){var fp=round[0];set(fp[0],"final");set(fp[1],"final");var ca=knockoutWinnerA(fp[0],fp[1]);set(ca?fp[0]:fp[1],"champion");}
+  return stage;
+}
+
+/* ===================== UI ===================== */
+(function(){
+  "use strict";
+  var tabs=document.querySelectorAll(".tab"),panels=document.querySelectorAll(".panel");
+  tabs.forEach(function(tab){tab.addEventListener("click",function(){
+    tabs.forEach(function(t){t.classList.remove("active");});
+    panels.forEach(function(p){p.classList.remove("active");});
+    tab.classList.add("active");document.getElementById(tab.dataset.tab).classList.add("active");
+  });});
+
+  var STAGE_RANK={groups:0,round32:1,round16:2,quarterfinal:3,semifinal:4,final:5,champion:6};
+  var runBtn=document.getElementById("runBtn"),numSimsSel=document.getElementById("numSims"),
+      progressWrap=document.getElementById("progressWrap"),progressBar=document.getElementById("progressBar"),
+      progressText=document.getElementById("progressText"),simMeta=document.getElementById("simMeta"),
+      resultsTable=document.getElementById("resultsTable"),tbody=resultsTable.querySelector("tbody");
+  function pct(x){return (x*100).toFixed(1)+"%";}
+
+  function renderResults(rows,numSims){
+    tbody.innerHTML="";
+    var maxC=rows.length?rows[0].champion:1;
+    rows.forEach(function(r,i){
+      var tr=document.createElement("tr");
+      tr.innerHTML="<td>"+(i+1)+"</td><td>"+r.flag+" "+r.name+"</td><td>"+r.group+"</td><td>"+r.elo+"</td>"+
+        '<td class="bar-cell"><span class="fill" style="width:'+(maxC?(r.champion/maxC)*100:0)+'%"></span><span class="val">'+pct(r.champion)+"</span></td>"+
+        "<td>"+pct(r.finalist)+"</td><td>"+pct(r.semifinal)+"</td><td>"+pct(r.quarterfinal)+"</td>";
+      tbody.appendChild(tr);
+    });
+    resultsTable.classList.remove("hidden");
+    simMeta.textContent="Based on "+numSims.toLocaleString()+" simulated tournaments. Favourite: "+rows[0].flag+" "+rows[0].name+".";
+  }
+
+  // Runs the Monte Carlo loop in async batches so the UI/progress bar stay live
+  // (no Web Worker, so this works straight from a file:// double-click).
+  function runSimulation(){
+    var numSims=parseInt(numSimsSel.value,10);
+    runBtn.disabled=true;resultsTable.classList.add("hidden");
+    progressWrap.classList.remove("hidden");progressBar.style.width="0%";progressText.textContent="0%";
+    simMeta.textContent="Simulating "+numSims.toLocaleString()+" tournaments…";
+    var champ={},fin={},semi={},quart={};
+    for(var i=0;i<TEAMS.length;i++){var nm=TEAMS[i].name;champ[nm]=0;fin[nm]=0;semi[nm]=0;quart[nm]=0;}
+    var done=0,BATCH=250;
+    function batch(){
+      var end=Math.min(done+BATCH,numSims);
+      for(;done<end;done++){
+        var st=simulateTournament();
+        for(var name in st){var rk=STAGE_RANK[st[name]];
+          if(rk>=6)champ[name]++;if(rk>=5)fin[name]++;if(rk>=4)semi[name]++;if(rk>=3)quart[name]++;}
+      }
+      var p=Math.floor(done/numSims*100);
+      progressBar.style.width=p+"%";progressText.textContent=p+"%";
+      if(done<numSims){setTimeout(batch,0);return;}
+      var rows=TEAMS.map(function(t){return {name:t.name,flag:t.flag,group:t.group,elo:t.elo,
+        champion:champ[t.name]/numSims,finalist:fin[t.name]/numSims,semifinal:semi[t.name]/numSims,quarterfinal:quart[t.name]/numSims};});
+      rows.sort(function(a,b){return b.champion-a.champion;});
+      progressWrap.classList.add("hidden");renderResults(rows,numSims);runBtn.disabled=false;
+    }
+    setTimeout(batch,0);
+  }
+  runBtn.addEventListener("click",runSimulation);
+
+  // Head-to-head
+  var teamASel=document.getElementById("teamA"),teamBSel=document.getElementById("teamB"),
+      predictBtn=document.getElementById("predictBtn"),h2hResult=document.getElementById("h2hResult");
+  TEAMS.slice().sort(function(a,b){return a.name.localeCompare(b.name);}).forEach(function(t){
+    teamASel.add(new Option(t.flag+" "+t.name,t.name));teamBSel.add(new Option(t.flag+" "+t.name,t.name));});
+  teamASel.value="Argentina";teamBSel.value="France";
+  function findTeam(n){for(var i=0;i<TEAMS.length;i++)if(TEAMS[i].name===n)return TEAMS[i];return null;}
+  function predict(){
+    var a=findTeam(teamASel.value),b=findTeam(teamBSel.value);
+    if(!a||!b)return;
+    if(a===b){h2hResult.innerHTML="<p class='meta'>Pick two different teams.</p>";return;}
+    var r=headToHead(a,b);
+    h2hResult.innerHTML="<div class='h2h-line'><span>"+a.flag+" "+a.name+"</span><span>"+b.flag+" "+b.name+"</span></div>"+
+      "<div class='h2h-bars'><div class='seg-a' style='width:"+Math.max(r.winA*100,6)+"%'>"+(r.winA*100).toFixed(1)+"%</div>"+
+      "<div class='seg-d' style='width:"+Math.max(r.draw*100,6)+"%'>"+(r.draw*100).toFixed(1)+"%</div>"+
+      "<div class='seg-b' style='width:"+Math.max(r.winB*100,6)+"%'>"+(r.winB*100).toFixed(1)+"%</div></div>"+
+      "<p class='h2h-xg'>Expected goals: "+a.name+" "+r.xgA.toFixed(2)+" &ndash; "+r.xgB.toFixed(2)+" "+b.name+"</p>";
+  }
+  predictBtn.addEventListener("click",predict);predict();
+
+  // Teams & groups
+  var grid=document.getElementById("groupsGrid"),byGroup={};
+  TEAMS.forEach(function(t){(byGroup[t.group]=byGroup[t.group]||[]).push(t);});
+  Object.keys(byGroup).sort().forEach(function(g){
+    var card=document.createElement("div");card.className="group-card";
+    var rows=byGroup[g].slice().sort(function(a,b){return b.elo-a.elo;}).map(function(t){
+      return "<div class='row'><span>"+t.flag+" "+t.name+"</span><span class='elo'>"+t.elo+"</span></div>";}).join("");
+    card.innerHTML="<h3>Group "+g+"</h3>"+rows;grid.appendChild(card);
+  });
+})();
+</script>
+</body>
+</html>
