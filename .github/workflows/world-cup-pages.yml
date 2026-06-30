@@ -1,0 +1,45 @@
+name: Deploy World Cup 2026 app to GitHub Pages
+
+# Publishes the static app in world-cup-2026-predictor/ to GitHub Pages.
+# enablement: true turns Pages on automatically, so no manual settings step
+# is needed. Runs whenever this branch is pushed, or on demand.
+on:
+  push:
+    branches: [claude/world-cup-prediction-app-vji74n]
+    paths:
+      - "world-cup-2026-predictor/**"
+      - ".github/workflows/world-cup-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: world-cup-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages (enables Pages if needed)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: world-cup-2026-predictor
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
